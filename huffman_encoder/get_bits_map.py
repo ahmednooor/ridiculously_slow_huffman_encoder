@@ -1,6 +1,6 @@
 
 
-def get_bits(tree):
+def get_bits_map(tree):
     if not isinstance(tree, dict):
         return None
 

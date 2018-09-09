@@ -1,71 +1,107 @@
 from .get_frequencies import get_frequencies
 from .make_tree import make_tree
-from .get_bits import get_bits
+from .get_bits_map import get_bits_map
 from .text_to_bits import text_to_bits
-from .bits_to_int import bits_to_int
-from .int_to_bits import int_to_bits
+from .bits_to_bytes import bits_to_bytes
+from .freq_to_bytes import freq_to_bytes
+from .comb_freq_data_bytes import comb_freq_data_bytes
+from .sep_freq_data_bytes import sep_freq_data_bytes
+from .bytes_to_bits import bytes_to_bits
 from .bits_to_text import bits_to_text
-from .freq_int_from_bytes import freq_int_from_bytes
-from .freq_int_to_bytes import freq_int_to_bytes
 from .read_text_file import read_text_file
 from .write_byte_file import write_byte_file
 from .read_byte_file import read_byte_file
 from .write_text_file import write_text_file
 
+# TODO return meaningful stuff rather than none in case of errors or raise exceptions
+# TODO just raise exceptions instead or give some err code to now where the prob is
+# TODO make it compatible with all files rather than just text (read bytes instead of text)
+# TODO provide a gui wrapper
 
-def encode(text, only_bytes=False):
+def encode(text, single_output=False):
     freq_map = get_frequencies(text)
     tree = make_tree(freq_map)
-    bits_map = get_bits(tree)
+    bits_map = get_bits_map(tree)
     bits = text_to_bits(bits_map, text)
-    int_num = bits_to_int(bits)
-    byte_data = freq_int_to_bytes(freq_map, int_num)
+    encoded_data_bytes = bits_to_bytes(bits)
+    freq_bytes = freq_to_bytes(freq_map)
+    final_output_bytes = comb_freq_data_bytes(freq_bytes, encoded_data_bytes)
 
-    if None in [freq_map, tree, bits_map, bits, int_num, byte_data]:
-        if only_bytes:
-            return None
-        return None, None, None, None, None, None
+    # print('--ENCODE LOCALS')
+    # print('--ENCODE LOCALS')
+    # print(freq_map, '\n',  tree, '\n', bits, '\n', \
+    #     encoded_data_bytes, '\n', freq_bytes, '\n', final_output_bytes)
+    # print('--ENCODE LOCALS END')
 
-    if only_bytes:
-        return byte_data
+    if None in [freq_map, tree, bits_map, bits, \
+               encoded_data_bytes, freq_bytes, final_output_bytes]:
+        return None
 
-    return freq_map, tree, bits_map, bits, int_num, byte_data
+    if single_output is True:
+        return final_output_bytes
+    
+    return {'freq_map': freq_map, 
+            'tree': tree, 
+            'bits_map': bits_map, 
+            'bits': bits, 
+            'encoded_data_bytes': encoded_data_bytes, 
+            'freq_bytes': freq_bytes, 
+            'final_output_bytes': final_output_bytes}
 
 
 def encode_file(text_file_path, output_dir, out_file_name):
     text = read_text_file(text_file_path)
-    freq_map, tree, bits_map, bits, int_num, byte_data = encode(text)
-    is_out_file_written = write_byte_file(output_dir, out_file_name, byte_data)
+    encoded_output = encode(text)
+    
+    if encoded_output is None:
+        return False
+    
+    encoded_output_bytes = encoded_output['final_output_bytes']
+    is_out_file_written = write_byte_file(output_dir, out_file_name, encoded_output_bytes)
 
-    if None in [text, freq_map, tree, bits_map, bits, int_num, is_out_file_written]:
+    if is_out_file_written is None:
         return False
 
     return True
 
 
-def decode(byte_data, only_text=False):
-    freq_map, int_num = freq_int_from_bytes(byte_data)
-    bits_from_num = int_to_bits(int_num)
+def decode(total_byte_data, single_output=False):
+    freq_map, encoded_data_bytes = sep_freq_data_bytes(total_byte_data)
+    encoded_bits = bytes_to_bits(encoded_data_bytes)
     tree = make_tree(freq_map)
-    text = bits_to_text(bits_from_num, tree)
+    text = bits_to_text(encoded_bits, tree)
 
-    if None in [freq_map, int_num, bits_from_num, tree, text]:
-        if only_text:
-            return None
-        return None, None, None, None, None
+    # print('--DECODE LOCALS')
+    # print('--DECODE LOCALS')
+    # print(freq_map, '\n', tree, '\n', encoded_bits, '\n', encoded_data_bytes, '\n', \
+    #     total_byte_data.split(b'\x00\x00\x00')[0], text)
+    # print('--DECODE LOCALS END')
 
-    if only_text:
+    if None in [freq_map, encoded_data_bytes, encoded_bits, tree, text]:
+        return None
+
+    if single_output is True:
         return text
-    
-    return freq_map, int_num, bits_from_num, tree, text
+
+    return {'freq_map': freq_map, 
+            'encoded_data_bytes': encoded_data_bytes, 
+            'encoded_bits': encoded_bits, 
+            'tree': tree, 
+            'text': text}
+
 
 
 def decode_file(encoded_file_path, output_dir, out_file_name):
     byte_data = read_byte_file(encoded_file_path)
-    freq_map, int_num, bits_from_num, tree, text = decode(byte_data)
-    is_out_file_written = write_text_file(output_dir, out_file_name, text)
+    decoded_output = decode(byte_data)
 
-    if None in [freq_map, int_num, tree, bits_from_num, tree, text, is_out_file_written]:
+    if decoded_output is None:
+        return False
+
+    decoded_output_text = decoded_output['text']
+    is_out_file_written = write_text_file(output_dir, out_file_name, decoded_output_text)
+
+    if is_out_file_written is None:
         return False
 
     return True

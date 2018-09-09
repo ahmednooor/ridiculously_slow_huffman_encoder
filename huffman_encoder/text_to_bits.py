@@ -5,8 +5,11 @@ def text_to_bits(bits_map, text):
         return None
         
     text = text
+    bits = []
+    
+    for char in text:
+        bits.append(bits_map[char])
+    
+    bits = ''.join(bits)
 
-    for key in bits_map:
-        text = text.replace(key, bits_map[key])
-
-    return text
+    return bits

@@ -1,6 +1,5 @@
 # ridiculously_slow_huffman_encoder
-i mean srsly, it is ridiculously slow
-- 1 meg could take an eternity
+ok, not so slow now
 - can only do text files
 
 ### usage
@@ -21,6 +20,4 @@ from huffman_encoder import (
 > start from `interface.py` in `huffman_encoder/` if you want to read the source
 
 ### meta
-> this proj ain't worthy of any meta
-
 > do whatever you want
