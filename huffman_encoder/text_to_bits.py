@@ -1,7 +1,8 @@
 
 
 def text_to_bits(bits_map, text):
-    if not isinstance(bits_map, dict) or not isinstance(text, str):
+    if not isinstance(bits_map, dict) or not isinstance(text, str) \
+            and not isinstance(text, list):
         return None
         
     text = text

@@ -1,6 +1,6 @@
 
 
-def bits_to_text(bits, tree):
+def bits_to_decoded_text(bits, tree):
     if not isinstance(bits, str) or not isinstance(tree, dict):
         return None
 
