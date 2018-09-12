@@ -24,8 +24,8 @@ def main():
     # srsly, don't look at this code
     print()
     print('Tests:')
-    print('1) funcs: [encode_file, decode_file]: \t' + str(text_1 == text_2))
-    print('2) funcs: [encode, decode]: \t\t' + \
+    print('1) funcs: [encode_txt_file, decode_txt_file]: \t' + str(text_1 == text_2))
+    print('2) funcs: [encode_txt, decode_txt]: \t\t' + \
           str(text_1 == decode_txt(encode_txt(text_1, single_output=True), single_output=True)))
     
     i = 0

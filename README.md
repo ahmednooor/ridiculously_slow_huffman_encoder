@@ -1,7 +1,7 @@
 # ridiculously_slow_huffman_encoder
 not so slow now (not so fast either)
 - can do all files (hopefully)
-- text files compress well, while other files sometimes don't (sometimes expand)
+- text files compress well, while other files sometimes don't (sometimes expand instead)
 - although bin mode can compress text files as well, but better use text mode for text files (saves a couple bytes)
 
 ### usage
@@ -27,4 +27,5 @@ from huffman_encoder import (
 
 ### meta
 > do whatever you want
+
 > author: ahmed noor

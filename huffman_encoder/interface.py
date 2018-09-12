@@ -20,7 +20,7 @@ from .sep_freq_data_bytes_bin import sep_freq_data_bytes_bin
 from .bits_to_decoded_bytes_bin import bits_to_decoded_bytes_bin
 
 
-# TODO make it compatible with all files rather than just text (read bytes instead of text)
+# -d -impr TODO make it compatible with all files rather than just text (read bytes instead of text)
 # TODO return meaningful stuff rather than none in case of errors or raise exceptions
 # TODO just raise exceptions instead or give some err code to now where the prob is
 # TODO provide a gui wrapper
