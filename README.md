@@ -2,9 +2,15 @@
 not so slow now (not so fast either)
 - can do all files (hopefully)
 - text files compress well, while other files sometimes don't (sometimes expand instead)
-- although bin mode can compress text files as well, but better use text mode for text files (saves a couple bytes)
 
-### usage
+![Screenshot](https://raw.githubusercontent.com/ahmednooor/ridiculously_slow_huffman_encoder/master/assets/screenshot.png)
+
+### running the app in gui mode
+> clone this repo
+
+> double click `gui_main.pyw` to run the app
+
+### using the package separately
 > `python 3+` is a must (that rhymes)
 
 > copy the `huffman_encoder` dir to your proj dir and then,
@@ -23,7 +29,16 @@ from huffman_encoder import (
 ```
 > check `test_bin_mode.py` and `test_txt_mode.py` to get the hang of it
 
+> although bin mode can compress text files as well, but better use text mode for text files (saves a couple bytes)
+
 > start from `interface.py` in `huffman_encoder/` if you want to read the source
+
+### build executable
+- only for windows
+
+> run `make_exec.bat` in cmd
+
+> resultant `.exe` will be in `dist/` delete `build/` after completion
 
 ### meta
 > do whatever you want
