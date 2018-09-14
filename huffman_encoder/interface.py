@@ -1,4 +1,4 @@
-from .get_frequencies import get_frequencies
+from .get_freq import get_freq
 from .make_tree import make_tree
 from .get_bits_map import get_bits_map
 from .text_to_bits import text_to_bits
@@ -26,7 +26,7 @@ from .bits_to_decoded_bytes_bin import bits_to_decoded_bytes_bin
 # TODO provide a gui wrapper
 
 def encode_txt(text, single_output=False):
-    freq_map = get_frequencies(text)
+    freq_map = get_freq(text)
     tree = make_tree(freq_map)
     bits_map = get_bits_map(tree)
     bits = text_to_bits(bits_map, text)

@@ -1,6 +1,6 @@
 
 
-def get_frequencies(text):
+def get_freq(text):
     if not isinstance(text, str):
         return None
 
