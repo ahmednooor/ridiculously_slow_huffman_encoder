@@ -40,7 +40,7 @@ def main():
 
     print()
     print('Stats:')
-    print('Text File Size: \t' + str(os.path.getsize('./test_files/sample_bin.png')) + ' bytes')
+    print('Input File Size: \t' + str(os.path.getsize('./test_files/sample_bin.png')) + ' bytes')
     print('Encoded File Size: \t' + str(os.path.getsize('./test_files/encoded_bin.hc1')) + ' bytes')
     print('Percentage Compressed: \t' + '{0:.1f} %'.format(
         100 - ( ( os.path.getsize('./test_files/encoded_bin.hc1') / os.path.getsize('./test_files/sample_bin.png') )

@@ -100,6 +100,7 @@ def decode_txt_file(encoded_file_path, output_dir, out_file_name):
 
     return True
 
+_ENCODING_YIELDS = {}
 
 def encode_bin(byte_data, single_output=False):
     byte_data = [bytes([byte]) for byte in byte_data]
@@ -118,6 +119,14 @@ def encode_bin(byte_data, single_output=False):
 
     if single_output is True:
         return final_output_bytes
+
+    _ENCODING_YIELDS['freq_map'] = freq_map
+    _ENCODING_YIELDS['tree'] = tree
+    _ENCODING_YIELDS['bits_map'] = bits_map
+    _ENCODING_YIELDS['bits'] = bits
+    _ENCODING_YIELDS['encoded_data_bytes'] = encoded_data_bytes
+    _ENCODING_YIELDS['freq_bytes'] = freq_bytes
+    _ENCODING_YIELDS['final_output_bytes'] = final_output_bytes
     
     return {'freq_map': freq_map, 
             'tree': tree, 
@@ -131,6 +140,7 @@ def encode_bin(byte_data, single_output=False):
 def encode_bin_file(bin_file_path, output_dir, out_file_name):
     byte_data = read_byte_file(bin_file_path)
     encoded_output = encode_bin(byte_data)
+    # encoded_output = encode_bin(encoded_output['final_output_bytes'])
     
     if encoded_output is None:
         return False
@@ -156,6 +166,11 @@ def decode_bin(total_byte_data, single_output=False):
     if single_output is True:
         return decoded_bytes
 
+    # print(freq_map == _ENCODING_YIELDS['freq_map'])
+    # print(tree == _ENCODING_YIELDS['tree'])
+    # print(encoded_bits == _ENCODING_YIELDS['bits'])
+    # print(encoded_data_bytes == _ENCODING_YIELDS['encoded_data_bytes'])
+
     return {'freq_map': freq_map, 
             'encoded_data_bytes': encoded_data_bytes, 
             'encoded_bits': encoded_bits, 
@@ -166,6 +181,7 @@ def decode_bin(total_byte_data, single_output=False):
 def decode_bin_file(encoded_file_path, output_dir, out_file_name):
     byte_data = read_byte_file(encoded_file_path)
     decoded_output = decode_bin(byte_data)
+    # decoded_output = decode_bin(decoded_output['decoded_bytes'])
 
     if decoded_output is None:
         return False

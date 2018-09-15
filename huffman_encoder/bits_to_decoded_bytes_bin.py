@@ -17,7 +17,6 @@ def bits_to_decoded_bytes_bin(bits, tree):
             cur_node = cur_node['right']
         
         if cur_node['left'] is None and cur_node['right'] is None:
-            # decoded_bytes = decoded_bytes + cur_node['char']
             decoded_bytes.append(cur_node['char'])
 
             for key in tree:
