@@ -10,31 +10,27 @@ not so slow now (not so fast either)
 
 > double click `gui_main.pyw` to run the app
 
-### using the package separately
+### using as a package
 > `python 3+` is a must (that rhymes)
 
 > copy the `huffman_encoder` dir to your proj dir and then,
 
 ```python
 from huffman_encoder import (
-    encode_txt,
-    decode_txt,
-    encode_txt_file,
-    decode_txt_file,
-    encode_bin,
-    decode_bin,
-    encode_bin_file,
-    decode_bin_file
+    encode,
+    decode,
+    encode_file,
+    decode_file
 )
 ```
-> check `test_bin_mode.py` and `test_txt_mode.py` to get the hang of it
-
-> although bin mode can compress text files as well, but better use text mode for text files (saves a couple bytes)
+> check `tests.py` to get the hang of it
 
 > start from `interface.py` in `huffman_encoder/` if you want to read the source
 
 ### build executable
 - only for windows
+
+> replace python dir path with your's
 
 > run `make_exec.bat` in cmd
 

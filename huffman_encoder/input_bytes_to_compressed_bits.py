@@ -1,6 +1,6 @@
 
 
-def text_to_bits(bits_map, text):
+def input_bytes_to_compressed_bits(bits_map, text):
     if not isinstance(bits_map, dict) or not isinstance(text, str) \
             and not isinstance(text, list):
         return None

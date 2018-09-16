@@ -1,6 +1,6 @@
 pyinstaller gui_main.pyw ^
     --clean ^
-    --windowed --noconsole --onefile ^
+    --windowed --noconsole ^
     --name "File_Compression_Tool" ^
     --icon "./assets/icon.ico" ^
     --paths "C:/Users/Ahmed Noor/AppData/Local/Programs/Python/Python36-32/" ^

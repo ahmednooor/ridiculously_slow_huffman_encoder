@@ -1,6 +1,6 @@
 from .helpers import int_from_bytes
 
-def bytes_to_bits(encoded_byte_data):
+def encoded_bytes_to_bits(encoded_byte_data):
     if not isinstance(encoded_byte_data, bytes):
         return None
 

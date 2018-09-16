@@ -1,10 +1,10 @@
 
 
-def bits_to_decoded_text(bits, tree):
+def bits_to_decoded_bytes(bits, tree):
     if not isinstance(bits, str) or not isinstance(tree, dict):
         return None
 
-    text = ''
+    decoded_bytes = []
     cur_node = None
     
     for key in tree:
@@ -17,8 +17,9 @@ def bits_to_decoded_text(bits, tree):
             cur_node = cur_node['right']
         
         if cur_node['left'] is None and cur_node['right'] is None:
-            text = text + cur_node['char']
+            decoded_bytes.append(cur_node['char'])
+
             for key in tree:
                 cur_node = tree[key]
 
-    return text
+    return b''.join(decoded_bytes)

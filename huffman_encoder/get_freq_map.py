@@ -1,6 +1,6 @@
 
 
-def get_freq_bin(byte_data):
+def get_freq_map(byte_data):
     if not isinstance(byte_data, list):
         return None
     

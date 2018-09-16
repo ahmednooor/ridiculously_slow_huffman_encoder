@@ -5,13 +5,13 @@ from tkinter import filedialog, ttk, messagebox
 from tkinter.scrolledtext import ScrolledText
 
 from huffman_encoder import (
-    encode_bin,
-    decode_bin
+    encode,
+    decode
 )
 
 # configure root directory path relative to this file
-THIS_FOLDER_G = ""
-if getattr(sys, "frozen", False):
+THIS_FOLDER_G = ''
+if getattr(sys, 'frozen', False):
     # frozen
     THIS_FOLDER_G = os.path.dirname(sys.executable)
 else:
@@ -82,7 +82,7 @@ class CompressFrame(Frame):
         if uncompressed_data is None:
             self.status_label.config(text='ERROR: Could Not Open File!')
 
-        compressed_data = encode_bin(uncompressed_data, True)
+        compressed_data = encode(uncompressed_data, True)
         
         if compressed_data is None:
             self.status_label.config(text='ERROR: Compression Failed!')
@@ -93,8 +93,8 @@ class CompressFrame(Frame):
 
         output_filepath = filedialog \
                           .asksaveasfilename(initialdir=dir_name,
-                                             title="Save Compressed File",
-                                             filetypes=(("Compressed File","*.hc1"),("all files","*.*")))
+                                             title='Save Compressed File',
+                                             filetypes=(('Compressed File','*.hc1'),('all files','*.*')))
         
         isfilepath_selected = True if output_filepath != '' else False
         
@@ -173,7 +173,7 @@ class DecompressFrame(Frame):
         if compressed_data is None:
             self.status_label.config(text='ERROR: Could Not Open File!')
 
-        decompressed_data = decode_bin(compressed_data, True)
+        decompressed_data = decode(compressed_data, True)
         
         if decompressed_data is None:
             self.status_label.config(text='ERROR: Decompression Failed!')
@@ -184,8 +184,8 @@ class DecompressFrame(Frame):
 
         output_filepath = filedialog \
                           .asksaveasfilename(initialdir=dir_name,
-                                             title="Save Decompressed File",
-                                             filetypes=(("." + ext,"." + ext),("all files","*.*")))
+                                             title='Save Decompressed File',
+                                             filetypes=(('.' + ext,'.' + ext),('all files','*.*')))
 
         isfilepath_selected = True if output_filepath != '' else False
         
@@ -207,25 +207,25 @@ class MenuBar(Menu):
         super().__init__(parent)
 
         self.configure(
-            bg="#ddd",
+            bg='#ddd',
             relief=FLAT
         )
         self.add_command(
-            label="About",
+            label='About',
             command=self.show_about
         )
         self.add_command(
-            label="Quit!",
+            label='Quit!',
             command=parent.quit
         )
 
     def show_about(self):
         messagebox.showinfo(
-        "About",
-        """A File Compression / Decompression Tool based on Huffman Encoding
+        'About',
+        '''A File Compression / Decompression Tool based on Huffman Encoding
 
 Source Code:
-https://github.com/ahmednooor/ridiculously_slow_huffman_encoder""")
+https://github.com/ahmednooor/ridiculously_slow_huffman_encoder''')
 
 
 def main():

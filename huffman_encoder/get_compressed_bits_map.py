@@ -1,6 +1,6 @@
 
 
-def get_bits_map(tree):
+def get_compressed_bits_map(tree):
     if not isinstance(tree, dict):
         return None
 

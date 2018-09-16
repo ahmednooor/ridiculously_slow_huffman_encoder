@@ -1,6 +1,6 @@
 from .helpers import int_to_bytes
 
-def bits_to_bytes(bits):
+def compressed_bits_to_bytes(bits):
     if not isinstance(bits, str):
         return None
 
