@@ -27,6 +27,6 @@ def sep_freq_data_bytes(total_byte_data):
             freq_num_bytes = b''
             counter = 0
 
-    encoded_data_bytes = total_byte_data.split(b'\xf0\x0f\xf0\xf0')[-1]
+    encoded_data_bytes = b''.join(total_byte_data.split(b'\xf0\x0f\xf0\xf0')[1:])
 
     return freq_map, encoded_data_bytes
