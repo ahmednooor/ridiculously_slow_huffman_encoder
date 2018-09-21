@@ -2,6 +2,7 @@
 not so slow now (not so fast either)
 - can do all files (hopefully)
 - text files compress well, while other files sometimes don't (sometimes expand instead)
+- using pypy3 makes it almost 3x faster than using cpython
 
 ![Screenshot](https://raw.githubusercontent.com/ahmednooor/ridiculously_slow_huffman_encoder/master/assets/screenshot.png)
 
@@ -11,7 +12,7 @@ not so slow now (not so fast either)
 > double click `gui_main.pyw` to run the app
 
 ### using as a package
-> `python 3+` is a must (that rhymes)
+> `python 3.5+` is a must (that rhymes)
 
 > copy the `huffman_encoder` dir to your proj dir and then,
 
@@ -30,7 +31,7 @@ from huffman_encoder import (
 ### build executable
 - only for windows
 
-> replace python dir path with your's
+> replace python dir path with your's in `make_exec.bat`
 
 > run `make_exec.bat` in cmd
 

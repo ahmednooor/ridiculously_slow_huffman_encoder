@@ -1,4 +1,4 @@
-import os
+import os, time
 
 from huffman_encoder import (
     encode,
@@ -11,6 +11,7 @@ def test(input_file_path, output_dir, input_file_name):
     print('------------------------------------------------------------')
     print('TESTING FILE: "' + input_file_name + '"')
     print()
+    t1 = time.time()
     is_encoded = encode_file(
         input_file_path,
         output_dir,
@@ -27,7 +28,7 @@ def test(input_file_path, output_dir, input_file_name):
     )
     if is_decoded:
         print('Decoding Succcessful!')
-
+    t2 = time.time()
     
     with open(input_file_path, 'rb') as f:
         text_1 = f.read()
@@ -37,8 +38,12 @@ def test(input_file_path, output_dir, input_file_name):
     print()
     print('Tests:')
     print('1) funcs: [encode_file, decode_file]: \t' + str(text_1 == text_2))
-    print('2) funcs: [encode, decode]: \t\t' + \
-          str(text_1 == decode(encode(text_1, single_output=True), single_output=True)))
+    print('   Time Took (sec): \t' + str(t2 - t1))
+    t3 = time.time()
+    only_bytes_test = text_1 == decode(encode(text_1, single_output=True), single_output=True)
+    t4 = time.time()
+    print('2) funcs: [encode, decode]: \t\t' + str(only_bytes_test))
+    print('   Time Took (sec): \t' + str(t4 - t3))
     
     i = 0
     text_1_len = len(text_1)
@@ -63,7 +68,6 @@ def test(input_file_path, output_dir, input_file_name):
 
 def main():
     test('./test_files/sample_1.txt', './test_files/', 'sample_1.txt')
-    print()
     test('./test_files/sample_2.png', './test_files/', 'sample_2.png')
 
 
